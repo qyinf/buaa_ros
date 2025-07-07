@@ -1,0 +1,15 @@
+<launch>
+
+    <!-- gmapping -->
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
+        <param name="base_frame" value="base_footprint"/>
+    </node>
+    
+    <node respawn="true" pkg="joy" type="joy_node" name="wpb_home_joy">
+        <param name="dev" type="string" value="/dev/input/js0" />
+        <param name="deadzone" value="0.12" />
+    </node>
+
+    <arg name="rvizconfig" default="$(find wpb_home_tutorials)/rviz/slam.rviz" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+</launch>
